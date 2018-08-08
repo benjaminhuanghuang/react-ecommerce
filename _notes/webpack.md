@@ -38,3 +38,8 @@ npm install babel-loader babel-core babel-preset-env -D
 npm install react react-dom -S
 npm install babel-preset-react -D
 ```
+
+## Style
+```
+npm install style-loader css-loader extract-text-webpack-plugin -D
+```
