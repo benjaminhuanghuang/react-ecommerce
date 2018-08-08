@@ -39,7 +39,37 @@ npm install react react-dom -S
 npm install babel-preset-react -D
 ```
 
-## Style
+## css
 ```
 npm install style-loader css-loader extract-text-webpack-plugin -D
+```
+
+## sass
+```
+npm install sass-loader node-sass --save-dev
+```
+node-sass and webpack are sass-loader's peerDependency
+
+# image
+- https://webpack.docschina.org/guides/asset-management/
+```
+npm install file-loader -D
+```
+- https://webpack.docschina.org/loaders
+url-loader 功能类似于 file-loader，但是在文件大小（单位 byte）低于指定的限制时，可以返回一个 DataURL,
+Create seperate file when the content > size limit
+url-loader depends on file-loader
+```
+npm install url-loader -D
+```
+
+## font
+```
+npm i font-awesome -S
+```
+using file loader to process font file
+
+## dev server
+```
+npm i -D webpack-dev-server
 ```

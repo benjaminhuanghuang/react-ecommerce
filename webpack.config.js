@@ -1,13 +1,19 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const config = {
     mode: 'development',
+    devServer :{
+        contentBase: './dist',
+        port: 8964
+    },
     entry: './src/app.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'app.bundle.js'
+        publicPath: '/dist/',
+        filename: 'js/app.bundle.js'
     },
     module: {
         rules: [
@@ -25,18 +31,60 @@ const config = {
                 test: /\.css$/,
                 //use: [ 'style-loader', 'css-loader' ]
                 use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
+                    fallback: "style-loader",  // convert js string to style node
+                    use: "css-loader"          // convert css to commonJS module
                 })
-            }
+            },
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ["css-loader", "sass-loader"]
+                })
+            },
+            // {
+            //     test: /\.(png|svg|jpg|gif|jpeg)$/,
+            //     use: ['file-loader']
+            // },
+            {
+                test: /\.(png|jpg|gif|jpeg)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192,
+                            name: 'resource/[name].[ext]'
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'resource/[name].[ext]'
+                        }
+                    }
+                ]
+            },
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new ExtractTextPlugin("style.css"),
-    ]
+        // create style.css and inster it into output
+        new ExtractTextPlugin("css/[name].css")
+    ],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: { name: "common" }
+            }
+        }
+    }
 };
 
 module.exports = config;   
