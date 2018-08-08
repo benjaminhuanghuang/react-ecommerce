@@ -1,0 +1,19 @@
+{
+  "name": "react-ecommerce",
+  "version": "1.0.0",
+  "description": "- React 16+React-Router4 从零打造企业级电商后台管理系统     - https://www.bilibili.com/video/av26958424/?p=2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminhuanghuang/react-ecommerce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjaminhuanghuang/react-ecommerce/issues"
+  },
+  "homepage": "https://github.com/benjaminhuanghuang/react-ecommerce#readme"
+}
