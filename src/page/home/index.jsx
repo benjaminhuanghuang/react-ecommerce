@@ -5,7 +5,8 @@ import './index.css';
 class Home extends React.Component {
     render() {
         return (
-            <div>
+            <div id="page-wrapper">
+                <button className='btn btn-default'>Test</button>
             </div>
         )
     }
