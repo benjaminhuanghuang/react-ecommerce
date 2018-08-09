@@ -7,17 +7,20 @@
 import React from 'react';
 //
 import './index.scss';
-// 
+//
+import User from 'service/user-service.jsx'
 import MUtil from 'util/mm.jsx';
 
 const _mm = new MUtil();
+const _user = new User();
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            redirect: _mm.getUrlParam('redirect') || ''
         }
     }
 
@@ -30,19 +33,15 @@ class Login extends React.Component {
     }
 
     onSubmit(e) {
-        _mm.request({
-            url: 'manage/user/login.do',
-            type: 'POST',
-            data: {
-                username: this.state.username,
-                password: this.state.password
-            }
-
-        }).then((res)=>{
-
-        }, (err)=>{
-
-        });
+        _user.login({
+            username: this.state.username,
+            password: this.state.password
+        }).then((res) => {
+            // jump to previous page
+            this.props.history.push(this.state.redirect); 
+        }, (errMsg) => {
+            _mm.errorTips(errMsg);
+        });  
     }
 
     render() {

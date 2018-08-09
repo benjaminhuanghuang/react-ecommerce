@@ -44,6 +44,18 @@ class MUtil {
     doLogin() {
         window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname);
     }
+
+    getUrlParam(name) {
+        // xxx.com?param1=123&param2=abc
+        let queryStr = window.location.search.split('?')[1] || '';  //param1=123&param2=abc
+        const reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
+        let result = queryStr.match(reg);   // ['param=123', 'start&', '123', 'end&']
+        return result ? decodeURIComponent(result[2]) : null;
+    }
+
+    errorTips(errorMsg) {
+        alert(errorMsg || 'Something wrong');
+    }
 }
 
 export default MUtil;
