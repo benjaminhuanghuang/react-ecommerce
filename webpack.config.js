@@ -10,7 +10,7 @@ const config = {
         port: 8964,
         proxy: {
             '/manage':{
-                target: 'http://admintest.happymmal.com',
+                target: 'http://admintest.happymmall.com',
                 changeOrigin: true
             }
         }

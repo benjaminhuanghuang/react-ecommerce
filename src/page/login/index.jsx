@@ -55,17 +55,17 @@ class Login extends React.Component {
                             <div className="form-group">
                                 <label>User Name</label>
                                 <input type="text" className="form-control" placeholder="Email"
-                                    name="username" onChagne={e => { this.onInputChange(e) }}
+                                    name="username" onChange={e => { this.onInputChange(e) }}
                                 />
                             </div>
                             <div className="form-group">
                                 <label >Password</label>
                                 <input type="password" className="form-control" placeholder="Password"
-                                    name="password" onChagne={e => { this.onInputChange(e) }}
+                                    name="password" onChange={e => { this.onInputChange(e) }}
                                 />
                             </div>
                             <button className="btn btn-primary btn-lg btn-block"
-                                onSubmit={e => { this.onSubmit(e) }}>
+                                onClick={e => { this.onSubmit(e) }}>
                                 Submit
                             </button>
                         </div>
