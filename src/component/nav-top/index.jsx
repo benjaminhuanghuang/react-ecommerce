@@ -8,6 +8,12 @@ class NavTop extends React.Component {
         super(props);
 
     }
+
+    onLogout(){
+
+    }
+
+
     render() {
         return (
             <div className="navbar navbar-default top-navbar">
@@ -23,12 +29,11 @@ class NavTop extends React.Component {
                             <i className="fa fa-caret-down"></i>
                         </a>
                         <ul className="dropdown-menu dropdown-user">
-                            <li><a href="#"><i className="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i className="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li className="divider"></li>
-                            <li><a href="#"><i className="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li>
+                                <a onClick={() => { this.onLogout() }}>
+                                    <i className="fa fa-sign-out fa-fw"></i>
+                                    <span>Logout</span>
+                                </a>
                             </li>
                         </ul>
                     </li>

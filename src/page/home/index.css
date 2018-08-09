@@ -438,6 +438,7 @@ footer p {
 .top-navbar .dropdown-menu {
     min-width: 230px;
     border-radius: 0 0 4px 4px;
+    top: 98%
 }
 
 .top-navbar .dropdown-menu>li>a:hover, .top-navbar .dropdown-menu>li>a:focus {
