@@ -414,12 +414,21 @@ footer p {
     padding: 0px;
 }
 
+.top-navbar .nav>li:hover .dropdown-menu{
+    display: block;
+}
+
 .top-navbar .nav>li>a {
     position: relative;
     display: block;
     padding: 20px;
     color: #FFFFFF;
     margin: 0px;
+}
+
+.top-navbar .nav>li>a>span {
+    color: #666;
+    margin-right: 5px
 }
 
 .top-navbar .nav>li>a:hover, .top-navbar .nav>li>a:focus {
@@ -594,7 +603,7 @@ ul.nav.nav-second-level.collapse.in {
 @media(max-width:768px) {
     .top-navbar {
         position: relative;
-        top:0
+        top: 0
     }
     .top-navbar .navbar-brand {
         width: 100%
