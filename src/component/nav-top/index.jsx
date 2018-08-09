@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // copy code from 
 // https://webthemez.com/demo/insight-free-bootstrap-html5-admin-template/index.html
 
@@ -9,15 +10,9 @@ class NavTop extends React.Component {
     }
     render() {
         return (
-            <div className="navbar navbar-default top-navbar" role="navigation">
+            <div className="navbar navbar-default top-navbar">
                 <div className="navbar-header">
-                    <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                        <span className="sr-only">Toggle navigation</span>
-                        <span className="icon-bar"></span>
-                        <span className="icon-bar"></span>
-                        <span className="icon-bar"></span>
-                    </button>
-                    <a className="navbar-brand" href="index.html"><b>In</b>sight</a>
+                    <Link className="navbar-brand" to="/"><b>In</b>sight</Link>
                 </div>
 
                 <ul className="nav navbar-top-links navbar-right">
@@ -69,8 +64,8 @@ class NavTop extends React.Component {
                                 </a>
                             </li>
                         </ul>
-                </li>
-                <li className="dropdown">
+                    </li>
+                    <li className="dropdown">
                         <a className="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                             <i className="fa fa-tasks fa-fw"></i> <i className="fa fa-caret-down"></i>
                         </a>
@@ -146,8 +141,8 @@ class NavTop extends React.Component {
                                 </a>
                             </li>
                         </ul>
-                </li>
-                <li className="dropdown">
+                    </li>
+                    <li className="dropdown">
                         <a className="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                             <i className="fa fa-bell fa-fw"></i> <i className="fa fa-caret-down"></i>
                         </a>
@@ -204,8 +199,8 @@ class NavTop extends React.Component {
                                 </a>
                             </li>
                         </ul>
-                </li>
-                <li className="dropdown">
+                    </li>
+                    <li className="dropdown">
                         <a className="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                             <i className="fa fa-user fa-fw"></i> <i className="fa fa-caret-down"></i>
                         </a>
@@ -218,8 +213,8 @@ class NavTop extends React.Component {
                             <li><a href="#"><i className="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
-                </li>
-            </ul>
+                    </li>
+                </ul>
             </div>
         )
     }
