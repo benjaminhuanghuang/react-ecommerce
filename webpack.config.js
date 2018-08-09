@@ -5,7 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const config = {
     mode: 'development',
-    devServer :{
+    devServer: {
         contentBase: './dist',
         port: 8964
     },
@@ -14,6 +14,11 @@ const config = {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/dist/',
         filename: 'js/app.bundle.js'
+    },
+    resolve: {
+        alias: {
+            page: path.resolve(__dirname, 'src/page')
+        }
     },
     module: {
         rules: [
