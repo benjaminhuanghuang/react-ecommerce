@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 // copy code from 
 // https://webthemez.com/demo/insight-free-bootstrap-html5-admin-template/index.html
 
@@ -9,65 +10,56 @@ class NavSide extends React.Component {
     }
     render() {
         return (
-            <div className="navbar-default navbar-side" role="navigation">
+            <div className="navbar-default navbar-side">
                 <div className="sidebar-collapse">
                     <ul className="nav" id="main-menu">
-
                         <li>
-                            <a className="active-menu" href="index.html"><i className="fa fa-dashboard"></i> Dashboard</a>
+                            <NavLink exact activeClassName="active-menu" to="/">
+                                <i className="fa fa-dashboard"></i>
+                                <span>Home</span>
+                              </NavLink>
                         </li>
-                        <li>
-                            <a href="ui-elements.html"><i className="fa fa-desktop"></i> UI Elements</a>
-                        </li>
-                        <li>
-                            <a href="chart.html"><i className="fa fa-bar-chart-o"></i> Charts</a>
-                        </li>
-                        <li>
-                            <a href="tab-panel.html"><i className="fa fa-qrcode"></i> Tabs &amp; Panels</a>
-                        </li>
-
-                        <li>
-                            <a href="table.html"><i className="fa fa-table"></i> Responsive Tables</a>
-                        </li>
-                        <li>
-                            <a href="form.html"><i className="fa fa-edit"></i> Forms </a>
-                        </li>
-
-
-                        <li>
-                            <a href="#"><i className="fa fa-sitemap"></i> Multi-Level Dropdown<span className="fa arrow"></span></a>
-                            <ul className="nav nav-second-level collapse">
+                        <li className="active">
+                            <Link to="/product">
+                                <i className="fa fa-sitemap"></i>
+                                <span> Product</span>
+                                <span className="fa arrow"></span>
+                            </Link>
+                            <ul className="nav nav-second-level collapse in">
                                 <li>
-                                    <a href="#">Second Level Link</a>
+                                    <NavLink activeClassName="active-menu" to="/product">Product Management</NavLink>
                                 </li>
                                 <li>
-                                    <a href="#">Second Level Link</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Link<span className="fa arrow"></span></a>
-                                    <ul className="nav nav-third-level collapse">
-                                        <li>
-                                            <a href="#">Third Level Link</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Link</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Link</a>
-                                        </li>
-
-                                    </ul>
-
+                                    <NavLink activeClassName="active-menu" to="/product-category">Category Management</NavLink>
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="empty.html"><i className="fa fa-fw fa-file"></i> Empty Page</a>
+                        <li className="active">
+                            <Link to="order">
+                                <i className="fa fa-sitemap"></i>
+                                <span> Order</span>
+                                <span className="fa arrow"></span>
+                            </Link>
+                            <ul className="nav nav-second-level collapse in">
+                                <li>
+                                    <NavLink activeClassName="active-menu"  to="/order">Order Management</NavLink>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="active">
+                            <Link to="/user">
+                                <i className="fa fa-sitemap"></i>
+                                <span> User</span>
+                                <span className="fa arrow"></span>
+                            </Link>
+                            <ul className="nav nav-second-level collapse in">
+                                <li>
+                                    <NavLink activeClassName="active-menu"  to="/user">User Management</NavLink>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
-
                 </div>
-
             </div>
         )
     }

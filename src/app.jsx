@@ -13,7 +13,10 @@ class App extends React.Component {
                 <Layout>
                     <Switch>
                         <Route exact paht="/" component={Home} />
-                        <Redirect from="*" to="/" />
+                        <Route exact paht="/product" component={Home} />
+                        <Route exact paht="/product.category" component={Home} />
+                        <Route exact paht="/order" component={Home} />
+                        <Route exact paht="/user" component={Home} />
                     </Switch>
                 </Layout>
             </Router>
