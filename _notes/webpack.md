@@ -23,7 +23,7 @@ npm i webpack webpack-cli -D
 yarn add webpack webpack-cli  --dev
 ```
 
-## Html
+## Html and fav icon
 ```
 npm i html-webpack-plugin -D
 ```

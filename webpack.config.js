@@ -79,7 +79,8 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/index.html',
+            favicon: 'favicon.ico' 
         }),
         // create style.css and inster it into output
         new ExtractTextPlugin("css/[name].css")
