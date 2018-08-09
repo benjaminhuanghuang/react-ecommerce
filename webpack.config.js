@@ -7,7 +7,13 @@ const config = {
     mode: 'development',
     devServer: {
         contentBase: './dist',
-        port: 8964
+        port: 8964,
+        proxy: {
+            '/manage':{
+                target: 'http://admintest.happymmal.com',
+                changeOrigin: true
+            }
+        }
     },
     entry: './src/app.jsx',
     output: {
@@ -19,6 +25,7 @@ const config = {
         alias: {
             page: path.resolve(__dirname, 'src/page'),
             component: path.resolve(__dirname, 'src/component'),
+            util: path.resolve(__dirname, 'src/util'),
         }
     },
     module: {

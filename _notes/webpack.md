@@ -73,3 +73,4 @@ using file loader to process font file
 ```
 npm i -D webpack-dev-server
 ```
+- proxy for development
