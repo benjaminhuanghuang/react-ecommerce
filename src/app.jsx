@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-ro
 import Home from 'page/home/index.jsx';    
 import Layout from 'component/layout/index.jsx';    
 import Login from 'page/login/index.jsx';    
+import Error from 'page/error/index.jsx';    
 
 
 class App extends React.Component {
@@ -14,14 +15,15 @@ class App extends React.Component {
             <Router>
                 <Switch>
                     <Route path="/login" component={Login} />
-                    <Route exact path="/" render={(props) => (
+                    <Route path="/" render={(props) => (
                         <Layout>
                             <Switch>
-                                <Route exact paht="/" component={Home} />
-                                <Route exact paht="/product" component={Home} />
-                                <Route exact paht="/product-category" component={Home} />
-                                <Route exact paht="/order" component={Home} />
-                                <Route exact paht="/user" component={Home} />
+                                <Route exact path="/" component={Home} />
+                                <Route path="/product" component={Home} />
+                                <Route path="/product-category" component={Home} />
+                                <Route path="/order" component={Home} />
+                                <Route path="/user" component={Home} />
+                                <Route component={Error} />
                             </Switch>
                         </Layout>
                     )} />
