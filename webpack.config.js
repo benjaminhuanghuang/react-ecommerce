@@ -8,6 +8,9 @@ const config = {
     devServer: {
         contentBase: './dist',
         port: 8964,
+        historyApiFallback:{
+            index: '/dist/index.html'
+        },
         proxy: {
             '/manage':{
                 target: 'http://admintest.happymmall.com',
