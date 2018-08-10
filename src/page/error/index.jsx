@@ -5,15 +5,21 @@ import PageTitle from 'component/page-title/index.jsx'
 
 class Error extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {
         return (
             <div id="page-wrapper">
-                <p className="error">
-                    Error!
-                </p>
+                <PageTitle title="Error">
+
+                </PageTitle>
+                <div className="row">
+                    <div className="col-md-12">
+                        <span>Can not find url, </span>
+                        <Link to="/">Back to home page</Link>  
+                    </div>
+                </div>
             </div>
 
         );
