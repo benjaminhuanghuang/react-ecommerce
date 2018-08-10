@@ -12,6 +12,31 @@ class User {
 
         });
     }
+
+    checkLoginInfo(loginInfo){
+        let username = $.trim(loginInfo.username);
+        let password = $.trim(loginInfo.password);
+        if(typeof username !== 'string' || username.length === 0 )
+        {
+            return {
+                status: false,
+                msg:  "User name can not be empty."
+            }
+        }
+
+        if(typeof password !== 'string' || password.length === 0 )
+        {
+            return {
+                status: false,
+                msg:  "Password can not be empty."
+            }
+        }
+
+        return {
+            status: true,
+            msg: 'Logged in.'
+        };
+    }
 }
 
 

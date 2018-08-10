@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 //
-import Home from 'page/home/index.jsx';    // using alias defined in webpack.config.js
-import Layout from 'component/layout/index.jsx';    // using alias defined in webpack.config.js
-import Login from 'page/login/index.jsx';    // using alias defined in webpack.config.js
+// using alias defined in webpack.config.js
+import Home from 'page/home/index.jsx';    
+import Layout from 'component/layout/index.jsx';    
+import Login from 'page/login/index.jsx';    
 
 
 class App extends React.Component {
@@ -12,8 +13,8 @@ class App extends React.Component {
         return (
             <Router>
                 <Switch>
-                    <Route exact paht="/login" component={Login} />
-                    <Route exact paht="/" render={(props) => {
+                    <Route path="/login" component={Login} />
+                    <Route exact path="/" render={(props) => (
                         <Layout>
                             <Switch>
                                 <Route exact paht="/" component={Home} />
@@ -23,7 +24,7 @@ class App extends React.Component {
                                 <Route exact paht="/user" component={Home} />
                             </Switch>
                         </Layout>
-                    }} />
+                    )} />
                 </Switch>
             </Router>
         )
