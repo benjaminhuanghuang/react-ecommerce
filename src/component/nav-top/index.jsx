@@ -1,12 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+
 // copy code from 
 // https://webthemez.com/demo/insight-free-bootstrap-html5-admin-template/index.html
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import User from 'service/user-service.jsx'
+import MUtil from 'util/mm.jsx';
+
+const _mm = new MUtil();
+const _user = new User();
 
 class NavTop extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            username: _mm.getStorage('userInfo').username || ""
+        }
     }
 
     onLogout(){
@@ -25,7 +35,12 @@ class NavTop extends React.Component {
                     <li className="dropdown">
                         <a className="dropdown-toggle">
                             <i className="fa fa-user fa-fw"></i>
-                            <span>Welcome</span>
+                            {
+                                this.state.username 
+                                ? <span>Welcome, {this.state.username}</span> 
+                                : <span>Welcome</span> 
+                            }
+                            
                             <i className="fa fa-caret-down"></i>
                         </a>
                         <ul className="dropdown-menu dropdown-user">
