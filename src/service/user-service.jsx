@@ -13,6 +13,13 @@ class User {
         });
     }
 
+    logout(){
+        return _mm.request({
+            url: '/user/logout.do',
+            type: 'POST'
+        });
+    }
+
     checkLoginInfo(loginInfo){
         let username = $.trim(loginInfo.username);
         let password = $.trim(loginInfo.password);

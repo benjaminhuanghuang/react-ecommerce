@@ -19,8 +19,13 @@ class NavTop extends React.Component {
         }
     }
 
-    onLogout(){
-
+    onLogout() {
+        _user.logout().then(res => {
+            _mm.removeStorage('userInfo');
+            window.location.href = '/login';
+        }, errMsg => {
+            _mm.errTips(errMsg);
+        });
     }
 
 
@@ -36,11 +41,11 @@ class NavTop extends React.Component {
                         <a className="dropdown-toggle">
                             <i className="fa fa-user fa-fw"></i>
                             {
-                                this.state.username 
-                                ? <span>Welcome, {this.state.username}</span> 
-                                : <span>Welcome</span> 
+                                this.state.username
+                                    ? <span>Welcome, {this.state.username}</span>
+                                    : <span>Welcome</span>
                             }
-                            
+
                             <i className="fa fa-caret-down"></i>
                         </a>
                         <ul className="dropdown-menu dropdown-user">
