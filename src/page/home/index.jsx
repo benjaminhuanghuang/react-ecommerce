@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 //
 import './index.scss';
 import PageTitle from 'component/page-title/index.jsx'
+//
+import Statistic from 'service/statistic-service.jsx'
+import MUtil from 'util/mm.jsx';
+
+const _mm = new MUtil();
+const _statistic = new Statistic();
 
 class Home extends React.Component {
     constructor(props) {
@@ -15,6 +21,19 @@ class Home extends React.Component {
         }
     }
     
+    componentWillMount()
+    {
+        this.loadCount();
+    }
+
+    loadCount(){
+        _statistic.getHomeCount().then(res=>{
+            this.setState(res);
+        }, errMsg =>{
+            _mm.errorTips(errMsg);
+        });
+    }
+
     render() {
         return (
             <div id="page-wrapper">
