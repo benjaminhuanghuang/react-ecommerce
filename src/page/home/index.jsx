@@ -21,7 +21,7 @@ class Home extends React.Component {
         }
     }
     
-    componentWillMount()
+    componentDidMount()
     {
         this.loadCount();
     }
@@ -50,7 +50,7 @@ class Home extends React.Component {
                         </Link>
                     </div>
                     <div className="col-md-4">
-                        <Link to='/user' className="color-box green">
+                        <Link to='/product' className="color-box green">
                             <p className="count">{this.state.productCount}</p>
                             <p className="desc">
                                 <i className="fa fa-list"></i>
@@ -59,7 +59,7 @@ class Home extends React.Component {
                         </Link>
                     </div>
                     <div className="col-md-4">
-                        <Link to='/user' className="color-box blue">
+                        <Link to='/order' className="color-box blue">
                             <p className="count">{this.state.orderCount}</p>
                             <p className="desc">
                                 <i className="fa fa-check-square-o"></i>
