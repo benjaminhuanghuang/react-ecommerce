@@ -35,16 +35,15 @@ class ProductList extends React.Component {
     }
 
     loadProductList() {
-        let listParam ={}
+        let listParam = {}
         listParam.listType = this.state.listType;
         listParam.pageNum = this.state.pageNum;
 
-        if(this.state.listType === 'search')
-        {
+        if (this.state.listType === 'search') {
             listParam.searchType = this.state.searchType;
             listParam.keyword = this.state.searchKeyword;
         }
-         
+
         _product.getProductList(listParam).then(res => {
             this.setState(res)
         }, errMsg => {
@@ -87,7 +86,7 @@ class ProductList extends React.Component {
             pageNum: 1,
             searchType,
             searchKeyword
-        }, ()=>{
+        }, () => {
             this.loadProductList();
         });
 
@@ -133,7 +132,14 @@ class ProductList extends React.Component {
         });
         return (
             <div id="page-wrapper">
-                <PageTitle title="Product List" />
+                <PageTitle title="Product List">
+                    <div className="page-header-right">
+                        <Link className="btn btn-primary" to="/product/save">
+                            <i className="fa fa-plus"></i>
+                            <span>Add Product</span>
+                        </Link>
+                    </div>
+                </PageTitle>
                 <ListSearch onSearch={(searchType, searchKeyword) => this.onSearch(searchType, searchKeyword)} />
                 <TableList tableHeads={tableHeads}>
                     {listBody}
