@@ -56,7 +56,7 @@ class ProductList extends React.Component {
             }).then(res => {
                 _mm.successTips(res);
                 this.loadProductList();
-             }, errMsg => {
+            }, errMsg => {
                 _mm.errorTips(errMsg);
             });
         }
@@ -93,8 +93,8 @@ class ProductList extends React.Component {
                         </button>
                     </td>
                     <td>
-                        <Link className= "opear" to={`/product/detail/${product.id}`}>Details</Link>
-                        <Link className= "opear" to={`/product/save/${product.id}`}>Edit</Link>
+                        <Link className="opear" to={`/product/detail/${product.id}`}>Details</Link>
+                        <Link className="opear" to={`/product/save/${product.id}`}>Edit</Link>
                     </td>
                 </tr>
             )
@@ -104,9 +104,7 @@ class ProductList extends React.Component {
                 <PageTitle title="Product List" />
 
                 <TableList tableHeads={tableHeads}>
-                    {
-                        listBody
-                    }
+                    {listBody}
                 </TableList>
                 <Pagination current={this.state.pageNum} total={this.state.total}
                     onChange={(pageNum) => this.onPageNumChange(pageNum)} />

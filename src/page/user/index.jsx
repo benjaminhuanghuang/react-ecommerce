@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 //
 import PageTitle from 'component/page-title/index.jsx';
 import Pagination from 'util/pagination/index.jsx';
+import TableList from 'util/table-list/index.jsx';
 //
 import User from 'service/user-service.jsx'
 import MUtil from 'util/mm.jsx';
@@ -17,7 +18,6 @@ class UserList extends React.Component {
         this.state = {
             pageNum: 1,
             list: [],
-            firstLoading: true,
         }
     }
 
@@ -27,12 +27,8 @@ class UserList extends React.Component {
 
     loadUserList() {
         _user.getUserList(this.state.pageNum).then(res => {
-            this.setState(res, ()=>{
-                this.setState({
-                    firstLoading: false
-                })
-            }
-        )}, errMsg => {
+            this.setState(res)
+        }, errMsg => {
             this.setState({
                 list: []
             });
@@ -49,6 +45,14 @@ class UserList extends React.Component {
     }
 
     render() {
+        let tableHeads = [
+            { name: 'ID', width: '10%' },
+            { name: 'Name', width: '15%' },
+            { name: 'Email', width: '10%' },
+            { name: 'Phone', width: '15%' },
+            { name: 'Created Time', width: '15%' },
+        ];
+
         let listBody = this.state.list.map((user, index) => {
             return (
                 <tr key={index}>
@@ -60,37 +64,16 @@ class UserList extends React.Component {
                 </tr>
             )
         });
-        let listError = (
-            <tr><td colSpan="5" className="text-center">
-                {this.state.firstLoading ? "Is loading": "No data"}
-            </td></tr>
-        );
-        let tableBody = this.state.list.length > 0 ? listBody : listError;
+
         return (
             <div id="page-wrapper">
-                <PageTitle title="User List">
+                <PageTitle title="User List"/>
 
-                </PageTitle>  
-
-                <div className="row">
-                    <div className="col-md-12">
-                        <table className="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <td>ID</td>
-                                    <td>Name</td>
-                                    <td>Email</td>
-                                    <td>Phone</td>
-                                    <td>Create Time</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {tableBody}
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
+                <TableList tableHeads={tableHeads}>
+                    {
+                        listBody
+                    }
+                </TableList>
                 <Pagination current={this.state.pageNum} total={this.state.total}
                     onChange={(pageNum) => this.onPageNumChange(pageNum)} />
             </div>
