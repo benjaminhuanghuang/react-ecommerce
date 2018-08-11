@@ -45,6 +45,14 @@ class ProductList extends React.Component {
     }
 
     render() {
+        let tableHeads = [
+            { name: 'Product ID', width: '10%' },
+            { name: 'Product Information', width: '50%' },
+            { name: 'Price', width: '10%' },
+            { name: 'State', width: '15%' },
+            { name: 'Operation', width: '15%' },
+        ];
+
         let listBody = this.state.list.map((product, index) => {
             return (
                 <tr key={index}>
@@ -55,18 +63,24 @@ class ProductList extends React.Component {
                     </td>
                     <td>{product.price}</td>
                     <td>
-                        {
-                            <span>product.status == 1 ? 'aviliable':'unavaliable'</span>
-                        }
+                        <span>
+                            {
+                                product.status == 1 ? 'aviliable' : 'unavaliable'
+                            }
+                        </span>
+                    </td>
+                    <td>
+                        <Link to={`/product/detail/${product.id}`}>Details</Link>
+                        <Link to={`/product/save/${product.id}`}>Edit</Link>
                     </td>
                 </tr>
             )
         });
         return (
             <div id="page-wrapper">
-                <PageTitle title="Product List"/>
+                <PageTitle title="Product List" />
 
-                <TableList tableHeads={["ID", "Information", "Price", "State", "Operation"]}>
+                <TableList tableHeads={tableHeads}>
                     {
                         listBody
                     }

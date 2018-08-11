@@ -17,15 +17,23 @@ class TableList extends React.Component {
     }
 
     render() {
-        let tableHeader = this.props.tableHeads.map((tableHead, index) => {
-            <th key={index}>{tableHead}</th>
+        let tableHeader = this.props.tableHeads.map((thead, index) => {
+            if (typeof thead === 'object')
+            {
+                return <th key={index}  width={thead.width}>{thead.name}</th>
+            }
+            else if (typeof thead === 'string')
+            return <th key={index} >{thead}</th>
         });
+
         let listBody = this.props.children;
+        
         let listInfo = (
             <tr><td colSpan={this.props.tableHeads.length} className="text-center">
                 {this.state.firstLoading ? "Is loading" : "No data"}
             </td></tr>
         );
+        
         let tableBody = listBody.length > 0 ? listBody : listInfo;
 
         return (
