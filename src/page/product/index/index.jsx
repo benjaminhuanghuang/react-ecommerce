@@ -84,7 +84,7 @@ class ProductList extends React.Component {
                                 product.status == 1 ? 'aviliable' : 'unavaliable'
                             }
                         </span>
-                        <button onClick={(e) => { this.onSetProductStatus(e, product.id, product.stateus) }}>
+                        <button onClick={(e) => { this.onSetProductStatus(e, product.id, product.status) }}>
                             {
                                 product.status == 1 ? 'deactive' : 'active'
                             }

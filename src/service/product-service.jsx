@@ -14,13 +14,11 @@ class Product {
         });
     }
 
-    setProductStatus(productId, status) {
+    setProductStatus(productInfo) {
         return _mm.request({
             url: '/manage/product/set_sale_status.do',
             type: 'POST',
-            data: {
-                pageNum
-            }
+            data: productInfo
         });
     }
 }
