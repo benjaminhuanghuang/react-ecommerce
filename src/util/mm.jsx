@@ -59,6 +59,10 @@ class MUtil {
         alert(errorMsg || 'Something wrong');
     }
 
+    successTips(successMsg) {
+        alert(successMsg || 'Operate successfully');
+    }
+
     setStorage(name, data) {
         let dataType = typeof data;
         if(dataType === 'object')

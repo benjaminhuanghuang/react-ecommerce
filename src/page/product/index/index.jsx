@@ -44,6 +44,22 @@ class ProductList extends React.Component {
         });
     }
 
+    onSetProductStatus(e, productId, currentStatus) {
+        let confirmTips = currentStatus == 1 ? "Are you sure to deactive" : "Are you sure to inactive";
+        if (window.confirm(confirmTips)) {
+            let newStatus = currentStatus == 1 ? 2 : 1;
+            _product.setProductStatus({
+                productId: productId,
+                status: newStatus
+            }).then(res => {
+                _mm.successTips(res);
+                this.loadProductList();
+             }, errMsg => {
+                _mm.errorTips(errMsg);
+            });
+        }
+    }
+
     render() {
         let tableHeads = [
             { name: 'Product ID', width: '10%' },
@@ -68,6 +84,11 @@ class ProductList extends React.Component {
                                 product.status == 1 ? 'aviliable' : 'unavaliable'
                             }
                         </span>
+                        <button onClick={(e) => { this.onSetProductStatus(e, product.id, product.stateus) }}>
+                            {
+                                product.status == 1 ? 'deactive' : 'active'
+                            }
+                        </button>
                     </td>
                     <td>
                         <Link to={`/product/detail/${product.id}`}>Details</Link>

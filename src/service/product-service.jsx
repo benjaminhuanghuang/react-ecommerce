@@ -13,6 +13,16 @@ class Product {
             }
         });
     }
+
+    setProductStatus(productId, status) {
+        return _mm.request({
+            url: '/manage/product/set_sale_status.do',
+            type: 'POST',
+            data: {
+                pageNum
+            }
+        });
+    }
 }
 
 export default Product;

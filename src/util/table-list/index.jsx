@@ -23,7 +23,9 @@ class TableList extends React.Component {
                 return <th key={index}  width={thead.width}>{thead.name}</th>
             }
             else if (typeof thead === 'string')
-            return <th key={index} >{thead}</th>
+            {
+                return <th key={index} >{thead}</th>
+            }
         });
 
         let listBody = this.props.children;
