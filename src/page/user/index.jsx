@@ -67,13 +67,12 @@ class UserList extends React.Component {
 
         return (
             <div id="page-wrapper">
-                <PageTitle title="User List"/>
+                <PageTitle title="User List" />
 
                 <TableList tableHeads={tableHeads}>
-                    {
-                        listBody
-                    }
+                    {listBody}
                 </TableList>
+
                 <Pagination current={this.state.pageNum} total={this.state.total}
                     onChange={(pageNum) => this.onPageNumChange(pageNum)} />
             </div>

@@ -1,3 +1,8 @@
+/*
+    Copy inline from bootstrap 3.37
+    https://getbootstrap.com/docs/3.3/css/#forms
+*/
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 //
@@ -6,6 +11,7 @@ import Pagination from 'util/pagination/index.jsx';
 import TableList from 'util/table-list/index.jsx';
 //
 import './index.scss';
+import ListSearch from './index-list-search.jsx';
 //
 import Product from 'service/product-service.jsx'
 import MUtil from 'util/mm.jsx';
@@ -102,7 +108,7 @@ class ProductList extends React.Component {
         return (
             <div id="page-wrapper">
                 <PageTitle title="Product List" />
-
+                <ListSearch/>
                 <TableList tableHeads={tableHeads}>
                     {listBody}
                 </TableList>
