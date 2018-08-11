@@ -5,6 +5,8 @@ import PageTitle from 'component/page-title/index.jsx';
 import Pagination from 'util/pagination/index.jsx';
 import TableList from 'util/table-list/index.jsx';
 //
+import './index.scss';
+//
 import Product from 'service/product-service.jsx'
 import MUtil from 'util/mm.jsx';
 
@@ -79,20 +81,20 @@ class ProductList extends React.Component {
                     </td>
                     <td>{product.price}</td>
                     <td>
-                        <span>
+                        <p>
                             {
                                 product.status == 1 ? 'aviliable' : 'unavaliable'
                             }
-                        </span>
-                        <button onClick={(e) => { this.onSetProductStatus(e, product.id, product.status) }}>
+                        </p>
+                        <button className="btn btn-xs btn-warning" onClick={(e) => { this.onSetProductStatus(e, product.id, product.status) }}>
                             {
                                 product.status == 1 ? 'deactive' : 'active'
                             }
                         </button>
                     </td>
                     <td>
-                        <Link to={`/product/detail/${product.id}`}>Details</Link>
-                        <Link to={`/product/save/${product.id}`}>Edit</Link>
+                        <Link className= "opear" to={`/product/detail/${product.id}`}>Details</Link>
+                        <Link className= "opear" to={`/product/save/${product.id}`}>Edit</Link>
                     </td>
                 </tr>
             )
