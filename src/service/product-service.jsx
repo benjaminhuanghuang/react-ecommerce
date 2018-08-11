@@ -31,6 +31,17 @@ class Product {
             data: productInfo
         });
     }
+
+    //
+    getCategoryList(parentCategoryId) {
+        return _mm.request({
+            type: 'POST',
+            url: '/manage/category/get_category.do',
+            data: {
+                categoryId: parentCategoryId || 0
+            }
+        });
+    }
 }
 
 export default Product;
