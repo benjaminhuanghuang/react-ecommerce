@@ -54,12 +54,27 @@ class CategorySelector extends React.Component {
     }
 
     onSecondCategoryChange(e) {
+        let newValue = e.target.value || 0;
 
+        this.setState({
+            secondCategoryId: newValue,
+        }, () => {
+            this.onPropsCategoryChange();
+        })
     }
 
     // Pass to parent component
     onPropsCategoryChange() {
         // this.props.onPropsCategoryChange();
+        let categoryChangele = typeof this.props.onCategoryChange === 'function';
+        if (categoryChangele) {
+            if (this.state.secondCategoryId) {
+                this.props.onCategoryChange(this.state.secondCategoryId, this.state.firstCategoryId);
+            }
+            else {
+                this.props.onCategoryChange(this.state.firstCategoryId, 0);
+            }
+        }
     }
 
     render() {
@@ -75,20 +90,19 @@ class CategorySelector extends React.Component {
                     }
                 </select>
                 {
-                    this.state.secondCategoryList.length> 0 ?
-                    (
-                        <select name="" className="form-control cate-select"
-                            onChange={(e) => this.onSecondCategoryChange(e)}>
-                            <option value="">Please select catgory 2</option>
-                            {
-                                this.state.secondCategoryList.map((category, index) =>
-                                    <option value={category.id} key={index}>{category.name}</option>
-                                )
-                            }
-                        </select>
-                    ):  null
+                    this.state.secondCategoryList.length > 0 ?
+                        (
+                            <select name="" className="form-control cate-select"
+                                onChange={(e) => this.onSecondCategoryChange(e)}>
+                                <option value="">Please select catgory 2</option>
+                                {
+                                    this.state.secondCategoryList.map((category, index) =>
+                                        <option value={category.id} key={index}>{category.name}</option>
+                                    )
+                                }
+                            </select>
+                        ) : null
                 }
-
             </div>
         );
     }
