@@ -33,6 +33,9 @@ class UserList extends React.Component {
                 })
             }
         )}, errMsg => {
+            this.setState({
+                list: []
+            });
             _mm.errorTips(errMsg);
         });
     }

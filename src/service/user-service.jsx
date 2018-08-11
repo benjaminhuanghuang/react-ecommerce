@@ -50,7 +50,7 @@ class User {
                 pageNum
             }
         });
-    }
+    } 
 }
 
 
