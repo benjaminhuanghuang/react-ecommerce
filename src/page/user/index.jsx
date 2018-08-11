@@ -16,7 +16,8 @@ class UserList extends React.Component {
 
         this.state = {
             pageNum: 1,
-            list: []
+            list: [],
+            firstLoading: true,
         }
     }
 
@@ -26,8 +27,12 @@ class UserList extends React.Component {
 
     loadUserList() {
         _user.getUserList(this.state.pageNum).then(res => {
-            this.setState(res);
-        }, errMsg => {
+            this.setState(res, ()=>{
+                this.setState({
+                    firstLoading: false
+                })
+            }
+        )}, errMsg => {
             _mm.errorTips(errMsg);
         });
     }
@@ -48,19 +53,21 @@ class UserList extends React.Component {
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <td>{user.phone}</td>
-                    <td>{user.createTime}</td>
+                    <td>{new Date(user.createTime).toLocaleString()}</td>
                 </tr>
             )
         });
         let listError = (
-            <tr><td colSpan="5">No data</td></tr>
+            <tr><td colSpan="5" className="text-center">
+                {this.state.firstLoading ? "Is loading": "No data"}
+            </td></tr>
         );
         let tableBody = this.state.list.length > 0 ? listBody : listError;
         return (
             <div id="page-wrapper">
                 <PageTitle title="User List">
 
-                </PageTitle>
+                </PageTitle>  
 
                 <div className="row">
                     <div className="col-md-12">
