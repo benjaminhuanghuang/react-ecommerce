@@ -26,6 +26,7 @@ class ProductList extends React.Component {
         this.state = {
             pageNum: 1,
             list: [],
+            listType: 'list'    // default list or search result list
         }
     }
 
@@ -34,11 +35,21 @@ class ProductList extends React.Component {
     }
 
     loadProductList() {
-        _product.getProductList(this.state.pageNum).then(res => {
+        let listParam ={}
+        listParam.listType = this.state.listType;
+        listParam.pageNum = this.state.pageNum;
+
+        if(this.state.listType === 'search')
+        {
+            listParam.searchType = this.state.searchType;
+            listParam.keyword = this.state.searchKeyword;
+        }
+         
+        _product.getProductList(listParam).then(res => {
             this.setState(res)
         }, errMsg => {
             this.setState({
-                list: []
+                list: []    // show list info in table list
             });
             _mm.errorTips(errMsg);
         });
@@ -68,8 +79,19 @@ class ProductList extends React.Component {
         }
     }
 
-    onSearch(searchType, searchKeyword){
-        console.log(searchType, searchKeyword);
+    onSearch(searchType, searchKeyword) {
+        // console.log(searchType, searchKeyword);
+        let listType = searchKeyword === "" ? 'list' : 'search'
+        this.setState({
+            listType,
+            pageNum: 1,
+            searchType,
+            searchKeyword
+        }, ()=>{
+            this.loadProductList();
+        });
+
+
     }
 
     render() {
@@ -112,7 +134,7 @@ class ProductList extends React.Component {
         return (
             <div id="page-wrapper">
                 <PageTitle title="Product List" />
-                <ListSearch onSearch={(searchType, searchKeyword)=>this.onSearch(searchType, searchKeyword)}/>
+                <ListSearch onSearch={(searchType, searchKeyword) => this.onSearch(searchType, searchKeyword)} />
                 <TableList tableHeads={tableHeads}>
                     {listBody}
                 </TableList>
