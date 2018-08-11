@@ -68,6 +68,10 @@ class ProductList extends React.Component {
         }
     }
 
+    onSearch(searchType, searchKeyword){
+        console.log(searchType, searchKeyword);
+    }
+
     render() {
         let tableHeads = [
             { name: 'Product ID', width: '10%' },
@@ -108,7 +112,7 @@ class ProductList extends React.Component {
         return (
             <div id="page-wrapper">
                 <PageTitle title="Product List" />
-                <ListSearch/>
+                <ListSearch onSearch={(searchType, searchKeyword)=>this.onSearch(searchType, searchKeyword)}/>
                 <TableList tableHeads={tableHeads}>
                     {listBody}
                 </TableList>

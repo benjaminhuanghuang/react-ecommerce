@@ -4,7 +4,7 @@ class ListSearch extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchType: "",  // productId, productName
+            searchType: "productId",  // productId, productName
             searchKeyword: ""
         }
     }
@@ -20,7 +20,13 @@ class ListSearch extends React.Component {
 
     onSearch()
     {
-        this.props.onSearch(this.state.searchType, this.state.searchType);
+        this.props.onSearch(this.state.searchType, this.state.searchKeyword);
+    }
+
+    onSearchkeywordKeyUp(e)
+    {
+        if(e.keyCode === 13)
+            this.onSearch();
     }
 
     render() {
@@ -37,7 +43,8 @@ class ListSearch extends React.Component {
                         <div className="form-group">
                             <input type="text" className="form-control" placeholder="keyword" 
                             name="searchKeyword" 
-                            onChange={(e)=>{this.onValueChange(e)}}/>
+                            onChange={(e)=>{this.onValueChange(e)}}
+                            onKeyUp={(e)=>this.onSearchkeywordKeyUp(e)}/>
                         </div>
                         <button className="btn btn-primary" onClick={(e)=>this.onSearch(e)}>Search</button>
                     </div>
