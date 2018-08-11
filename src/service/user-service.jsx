@@ -6,36 +6,33 @@ const _mm = new MUtil();
 class User {
     login(loginInfo) {
         return _mm.request({
-            url: 'manage/user/login.do',
+            url: '/manage/user/login.do',
             type: 'POST',
             data: loginInfo
-
         });
     }
 
-    logout(){
+    logout() {
         return _mm.request({
             url: '/user/logout.do',
             type: 'POST'
         });
     }
 
-    checkLoginInfo(loginInfo){
+    checkLoginInfo(loginInfo) {
         let username = $.trim(loginInfo.username);
         let password = $.trim(loginInfo.password);
-        if(typeof username !== 'string' || username.length === 0 )
-        {
+        if (typeof username !== 'string' || username.length === 0) {
             return {
                 status: false,
-                msg:  "User name can not be empty."
+                msg: "User name can not be empty."
             }
         }
 
-        if(typeof password !== 'string' || password.length === 0 )
-        {
+        if (typeof password !== 'string' || password.length === 0) {
             return {
                 status: false,
-                msg:  "Password can not be empty."
+                msg: "Password can not be empty."
             }
         }
 
@@ -43,6 +40,16 @@ class User {
             status: true,
             msg: 'Logged in.'
         };
+    }
+
+    getUserList(pageNum) {
+        return _mm.request({
+            url: '/manage/user/list.do',
+            type: 'POST',
+            data: {
+                pageNum
+            }
+        });
     }
 }
 

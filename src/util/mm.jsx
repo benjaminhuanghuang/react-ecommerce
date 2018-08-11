@@ -1,6 +1,7 @@
 import { resolve } from "url";
 
 class MUtil {
+    /*
     request_old(param) {
         $.ajax({
             type: para.type || 'get',
@@ -15,7 +16,8 @@ class MUtil {
             }
         });
     }
-
+    */
+   
     request(param) {
         return new Promise((resolve, reject) => {
             $.ajax({
