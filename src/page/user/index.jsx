@@ -15,24 +15,47 @@ class UserList extends React.Component {
         super(props);
 
         this.state = {
-            pageNum : 1
+            pageNum: 1,
+            list: []
         }
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         this.loadUserList();
     }
 
-    loadUserList(){
-        _user.getUserList(this.state.pageNum).then(res=>{
+    loadUserList() {
+        _user.getUserList(this.state.pageNum).then(res => {
             this.setState(res);
-        }, errMsg=>{
+        }, errMsg => {
             _mm.errorTips(errMsg);
         });
     }
 
+    onPageNumChange(pageNum) {
+        this.setState({
+            pageNum
+        }, () => {
+            this.loadUserList();
+        });
+    }
+
     render() {
+        let listBody = this.state.list.map((user, index) => {
+            return (
+                <tr key={index}>
+                    <td>{user.id}</td>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.createTime}</td>
+                </tr>
+            )
+        });
+        let listError = (
+            <tr><td colSpan="5">No data</td></tr>
+        );
+        let tableBody = this.state.list.length > 0 ? listBody : listError;
         return (
             <div id="page-wrapper">
                 <PageTitle title="User List">
@@ -45,26 +68,21 @@ class UserList extends React.Component {
                             <thead>
                                 <tr>
                                     <td>ID</td>
-                                    <td>ID</td>
-                                    <td>ID</td>
-                                    <td>ID</td>
-                                    <td>ID</td>
+                                    <td>Name</td>
+                                    <td>Email</td>
+                                    <td>Phone</td>
+                                    <td>Create Time</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>111</td>
-                                    <td>111</td>
-                                    <td>111</td>
-                                    <td>111</td>
-                                    <td>111</td>
-                                </tr>
+                                {tableBody}
                             </tbody>
                         </table>
 
                     </div>
                 </div>
-                <Pagination current={11} total={100} onChnage={()=>{}}/>
+                <Pagination current={this.state.pageNum} total={this.state.total}
+                    onChange={(pageNum) => this.onPageNumChange(pageNum)} />
             </div>
         );
     }
