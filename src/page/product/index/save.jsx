@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 //
 import PageTitle from 'component/page-title/index.jsx';
 import CategorySelector from './category-selector.jsx';
+import FileUploader from 'util/file-uploader/index.jsx';
 
 //
 import Product from 'service/product-service.jsx'
@@ -77,10 +78,13 @@ class ProductSave extends React.Component {
                     </div>
                     <div className="form-group">
                         <label className="col-sm-2 control-label">Product Image</label>
-                        <div className="col-sm-3">
+                        <div className="col-md-10">
+                            <FileUploader>
 
+                            </FileUploader>
                         </div>
-                    </div>       <div className="form-group">
+                    </div>
+                    <div className="form-group">
                         <label className="col-sm-2 control-label">Product detail</label>
                         <div className="col-sm-3">
 
