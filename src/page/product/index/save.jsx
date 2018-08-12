@@ -24,6 +24,7 @@ class ProductSave extends React.Component {
         super(props);
 
         this.state = {
+            id: this.props.match.params.pid,
             name: '',
             subtitle: '',
             categoryId: 0,
@@ -36,7 +37,30 @@ class ProductSave extends React.Component {
         }
     }
 
-    // For simple type fields
+    componentDidMount(){
+        this.loadProduct();
+    }
+
+    loadProduct()
+    {
+        if(this.state.id)
+        {
+            _product.getProduct(this.state.id).then(res=>{
+                let images = res.subImages.split(',');
+                res.subImages = images.map(imgUri =>{
+                    return {
+                        uri: imgUri,
+                        url: res.imageHost + imgUri
+                     }
+                });
+
+                this.setState(res);
+            }, (errMsg)=>{
+                _mm.error.Tips(errMsg);
+            });
+        }
+    }   
+     // For simple type fields
     onValueChange(e) {
         let name = e.target.name;
         let value = e.target.value.trim();
@@ -123,19 +147,22 @@ class ProductSave extends React.Component {
                         <label className="col-sm-2 control-label">Product Name</label>
                         <div className="col-sm-5">
                             <input type="text" className="form-control" placeholder="Product name"
-                                name='name' onChange={(e) => this.onValueChange(e)} />
+                                name='name' value={this.state.name}
+                                onChange={(e) => this.onValueChange(e)} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-2 control-label">Product info</label>
                         <div className="col-sm-5">
                             <input type="text" className="form-control" placeholder="product info"
-                                name='subtitle' onChange={(e) => this.onValueChange(e)} />
+                                name='subtitle' value={this.state.subtitle}
+                                onChange={(e) => this.onValueChange(e)} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-2 control-label">Product category</label>
-                        <CategorySelector onCategoryChange={(categoryId, parentCategoryId) => this.onCategoryChange(categoryId, parentCategoryId)} />
+                        <CategorySelector categoryId={this.state.categoryId} parentCategoryId={this.state.parentCategoryId}
+                            onCategoryChange={(categoryId, parentCategoryId) => this.onCategoryChange(categoryId, parentCategoryId)} />
                     </div>
 
                     <div className="form-group">
@@ -143,7 +170,8 @@ class ProductSave extends React.Component {
                         <div className="col-sm-3">
                             <div className="input-group">
                                 <input type="number" className="form-control" placeholder="product price"
-                                    name='price' onChange={(e) => this.onValueChange(e)} />
+                                    name='price' value ={this.state.price}
+                                    onChange={(e) => this.onValueChange(e)} />
                                 <span className="input-group-addon">$</span>
                             </div>
                         </div>
@@ -154,7 +182,8 @@ class ProductSave extends React.Component {
                         <div className="col-sm-3">
                             <div className="input-group">
                                 <input type="number" className="form-control" placeholder="product inventory"
-                                    name='stock' onChange={(e) => this.onValueChange(e)} />
+                                    name='stock' value ={this.state.stock}
+                                    onChange={(e) => this.onValueChange(e)} />
                                 <span className="input-group-addon">N</span>
                             </div>
                         </div>
@@ -182,8 +211,8 @@ class ProductSave extends React.Component {
                     <div className="form-group">
                         <label className="col-md-2 control-label">Product detail</label>
                         <div className="col-md-10">
-                            <RichEditor onValueChange={(value) => this.onRichEditorChange(value)}
-                            />
+                            <RichEditor detail = {this.state.detail}
+                                onValueChange={(value) => this.onRichEditorChange(value)}/>
                         </div>
                     </div>
                     <div className="form-group">

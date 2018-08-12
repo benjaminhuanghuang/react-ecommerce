@@ -23,6 +23,17 @@ class Product {
             data
         });
     }
+    
+    getProduct(id){
+        return _mm.request({
+            url: '/manage/product/detail.do',
+            type: 'POST',
+            data: {
+                productId: id || 0
+            }
+        });
+    }
+
 
     setProductStatus(productInfo) {
         return _mm.request({
