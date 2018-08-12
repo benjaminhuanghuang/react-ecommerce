@@ -82,6 +82,27 @@ class ProductSave extends React.Component {
         });
     }
 
+    getSubImagesString(){
+        return this.state.subImages.map((image)=>image.url).join(',');
+
+    }
+
+    onSubmit(e)
+    {
+        let product = {
+            name: this.state.name,
+            subtitle: this.state.subtitle,
+            categoryId:this.state.categoryId,
+            subImages: this.getSubImagesString(),
+            detail: this.state.detail,
+            price: this.state.price,
+            stock: this.state.stock,
+            status: this.state.status,
+        };
+
+        _product.aaaa(product);
+    }
+
     render() {
         return (
             <div id="page-wrapper">
@@ -156,7 +177,7 @@ class ProductSave extends React.Component {
                     </div>
                     <div className="form-group">
                         <div className="col-sm-offset-2 col-sm-10">
-                            <button type="submit" className="btn btn-primary" onClick={() => { }}>Submit</button>
+                            <button type="submit" className="btn btn-primary" onClick={(e) => this.onSubmit(e)}>Submit</button>
                         </div>
                     </div>
                 </div>
