@@ -59,6 +59,13 @@ class ProductSave extends React.Component {
         );
     }
 
+    onRichEditorChange(value){
+        console.log(value);
+        this.setState({
+             detail: value
+        });
+    }
+
     render() {
         return (
             <div id="page-wrapper">
@@ -121,9 +128,10 @@ class ProductSave extends React.Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <label className="col-sm-2 control-label">Product detail</label>
-                        <div className="col-sm-3">
-                            <RichEditor/>
+                        <label className="col-md-2 control-label">Product detail</label>
+                        <div className="col-md-10">
+                            <RichEditor onValueChange={(value)=>this.onRichEditorChange(value)}
+                            />
                         </div>
                     </div>
                     <div className="form-group">
