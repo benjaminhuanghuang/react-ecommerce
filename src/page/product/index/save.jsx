@@ -24,10 +24,26 @@ class ProductSave extends React.Component {
         super(props);
 
         this.state = {
+            name:'',
+            subtitle:'',
             categoryId: 0,
             parentCategoryId: 0,
-            subImages: []
+            subImages: [],
+            price:'',
+            stock:'',
+            detail:'',
+            status: 1   // available 
         }
+    }
+
+    // For simple type fields
+    onValueChange(e) {
+        let name = e.target.name;
+        let value = e.target.value.trim();
+
+        this.setState({
+            [name]: value
+        });
     }
 
     onCategoryChange(categoryId, parentCategoryId) {
@@ -50,19 +66,19 @@ class ProductSave extends React.Component {
         _mm.errorTips(errMsg || "upload file failed.");
     }
 
-    onImageDelete(e){
+    onImageDelete(e) {
         let index = parseInt(e.target.getAttribute('index'));
         let subImages = this.state.subImages;
         subImages.splice(index, 1);
         this.setState(
-            {subImages}
+            { subImages }
         );
     }
 
-    onRichEditorChange(value){
+    onRichEditorChange(value) {
         console.log(value);
         this.setState({
-             detail: value
+            detail: value
         });
     }
 
@@ -74,13 +90,15 @@ class ProductSave extends React.Component {
                     <div className="form-group">
                         <label className="col-sm-2 control-label">Product Name</label>
                         <div className="col-sm-5">
-                            <input type="text" className="form-control" placeholder="Product name" />
+                            <input type="text" className="form-control" placeholder="Product name"
+                                name='name' onChange={(e) => this.onValueChange(e)} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-2 control-label">Product info</label>
                         <div className="col-sm-5">
-                            <input type="text" className="form-control" placeholder="product info" />
+                            <input type="text" className="form-control" placeholder="product info"
+                                name='subtitle' onChange={(e) => this.onValueChange(e)} />
                         </div>
                     </div>
                     <div className="form-group">
@@ -92,7 +110,8 @@ class ProductSave extends React.Component {
                         <label className="col-sm-2 control-label">Product price</label>
                         <div className="col-sm-3">
                             <div className="input-group">
-                                <input type="number" className="form-control" placeholder="product price" />
+                                <input type="number" className="form-control" placeholder="product price" 
+                                 name='price' onChange={(e) => this.onValueChange(e)} />
                                 <span className="input-group-addon">$</span>
                             </div>
                         </div>
@@ -102,7 +121,8 @@ class ProductSave extends React.Component {
                         <label className="col-sm-2 control-label">Product inventory</label>
                         <div className="col-sm-3">
                             <div className="input-group">
-                                <input type="number" className="form-control" placeholder="product inventory" />
+                                <input type="number" className="form-control" placeholder="product inventory" 
+                                    name='stock' onChange={(e) => this.onValueChange(e)}/>
                                 <span className="input-group-addon">N</span>
                             </div>
                         </div>
@@ -114,8 +134,8 @@ class ProductSave extends React.Component {
                                 this.state.subImages.length > 0
                                     ? this.state.subImages.map((image, index) => (
                                         <div className="img-container" key={index}>
-                                            <img src={image.url} className="sub-img"/>
-                                            <i className="fa fa-close" onClick={(e)=> this.onImageDelete(e)} index={index}></i>
+                                            <img src={image.url} className="sub-img" />
+                                            <i className="fa fa-close" onClick={(e) => this.onImageDelete(e)} index={index}></i>
                                         </div>
                                     ))
                                     : <div>Please update image</div>
@@ -130,7 +150,7 @@ class ProductSave extends React.Component {
                     <div className="form-group">
                         <label className="col-md-2 control-label">Product detail</label>
                         <div className="col-md-10">
-                            <RichEditor onValueChange={(value)=>this.onRichEditorChange(value)}
+                            <RichEditor onValueChange={(value) => this.onRichEditorChange(value)}
                             />
                         </div>
                     </div>
