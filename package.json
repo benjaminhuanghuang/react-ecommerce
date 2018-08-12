@@ -41,7 +41,6 @@
     "rc-pagination": "^1.16.5",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-fileupload": "^2.4.0",
     "react-router-dom": "^4.3.1"
   }
 }

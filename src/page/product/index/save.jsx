@@ -39,7 +39,7 @@ class ProductSave extends React.Component {
         return (
             <div id="page-wrapper">
                 <PageTitle title="Add Product" />
-                <form className="form-horizontal">
+                <div className="form-horizontal">
                     <div className="form-group">
                         <label className="col-sm-2 control-label">Product Name</label>
                         <div className="col-sm-5">
@@ -95,7 +95,7 @@ class ProductSave extends React.Component {
                             <button type="submit" className="btn btn-primary" onClick={() => { }}>Submit</button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         );
     }
