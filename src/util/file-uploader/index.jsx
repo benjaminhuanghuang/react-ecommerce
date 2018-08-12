@@ -15,7 +15,7 @@ class FileUploader extends React.Component {
 
         return (
             <FileUpload options={options}>
-                <button ref="chooseAndUpload">choose</button>
+                <button className="btn btn-xs btn-default" ref="chooseAndUpload">choose</button>
                 {/* <button ref="uploadBtn">upload</button> */}
             </FileUpload>
         );

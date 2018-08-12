@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import PageTitle from 'component/page-title/index.jsx';
 import CategorySelector from './category-selector.jsx';
 import FileUploader from 'util/file-uploader/index.jsx';
+import RichEditor from 'util/rich-editor/index.jsx';
 //
 import './save.scss';
 //
@@ -47,6 +48,15 @@ class ProductSave extends React.Component {
 
     onUploadError(errMsg) {
         _mm.errorTips(errMsg || "upload file failed.");
+    }
+
+    onImageDelete(e){
+        let index = parseInt(e.target.getAttribute('index'));
+        let subImages = this.state.subImages;
+        subImages.splice(index, 1);
+        this.setState(
+            {subImages}
+        );
     }
 
     render() {
@@ -98,12 +108,13 @@ class ProductSave extends React.Component {
                                     ? this.state.subImages.map((image, index) => (
                                         <div className="img-container" key={index}>
                                             <img src={image.url} className="sub-img"/>
+                                            <i className="fa fa-close" onClick={(e)=> this.onImageDelete(e)} index={index}></i>
                                         </div>
                                     ))
                                     : <div>Please update image</div>
                             }
                         </div>
-                        <div className="col-md-10">
+                        <div className="col-md-10 col-md-offset-2 file-upload-container">
                             <FileUploader onSuccess={(data) => this.onUploadSuccess(data)}
                                 onError={(errMsg) => onUploadError(errMsg)}>
                             </FileUploader>
@@ -112,7 +123,7 @@ class ProductSave extends React.Component {
                     <div className="form-group">
                         <label className="col-sm-2 control-label">Product detail</label>
                         <div className="col-sm-3">
-
+                            <RichEditor/>
                         </div>
                     </div>
                     <div className="form-group">
