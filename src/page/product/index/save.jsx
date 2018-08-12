@@ -24,14 +24,14 @@ class ProductSave extends React.Component {
         super(props);
 
         this.state = {
-            name:'',
-            subtitle:'',
+            name: '',
+            subtitle: '',
             categoryId: 0,
             parentCategoryId: 0,
             subImages: [],
-            price:'',
-            stock:'',
-            detail:'',
+            price: '',
+            stock: '',
+            detail: '',
             status: 1   // available 
         }
     }
@@ -47,7 +47,7 @@ class ProductSave extends React.Component {
     }
 
     onCategoryChange(categoryId, parentCategoryId) {
-        console.log("Category changed", categoryId, parentCategoryId);
+        // console.log("Category changed", categoryId, parentCategoryId);
         this.setState({
             categoryId,
             parentCategoryId
@@ -82,25 +82,36 @@ class ProductSave extends React.Component {
         });
     }
 
-    getSubImagesString(){
-        return this.state.subImages.map((image)=>image.url).join(',');
-
+    getSubImagesString() {
+        return this.state.subImages.map((image) => image.url).join(',');
     }
 
-    onSubmit(e)
-    {
+    onSubmit(e) {
         let product = {
             name: this.state.name,
             subtitle: this.state.subtitle,
-            categoryId:this.state.categoryId,
+            categoryId: parseInt(this.state.categoryId),
             subImages: this.getSubImagesString(),
             detail: this.state.detail,
-            price: this.state.price,
-            stock: this.state.stock,
+            price: parseFloat(this.state.price),
+            stock: parseInt(this.state.stock),
             status: this.state.status,
         };
-
-        _product.aaaa(product);
+        // console.log(product);
+        let productCheckResult = _product.checkProduct(product);
+        // form validation
+        if (productCheckResult.status) {
+            _product.saveProduct(produt).then(res => {
+                _mm.successTips(res);
+                this.props.history.push('/product/index');
+            }, errMsg => {
+                _mm.errorTips(errMsg);
+            });
+        }
+        else
+        {
+            _mm.errorTips(productCheckResult.msg);
+        }
     }
 
     render() {
@@ -131,8 +142,8 @@ class ProductSave extends React.Component {
                         <label className="col-sm-2 control-label">Product price</label>
                         <div className="col-sm-3">
                             <div className="input-group">
-                                <input type="number" className="form-control" placeholder="product price" 
-                                 name='price' onChange={(e) => this.onValueChange(e)} />
+                                <input type="number" className="form-control" placeholder="product price"
+                                    name='price' onChange={(e) => this.onValueChange(e)} />
                                 <span className="input-group-addon">$</span>
                             </div>
                         </div>
@@ -142,8 +153,8 @@ class ProductSave extends React.Component {
                         <label className="col-sm-2 control-label">Product inventory</label>
                         <div className="col-sm-3">
                             <div className="input-group">
-                                <input type="number" className="form-control" placeholder="product inventory" 
-                                    name='stock' onChange={(e) => this.onValueChange(e)}/>
+                                <input type="number" className="form-control" placeholder="product inventory"
+                                    name='stock' onChange={(e) => this.onValueChange(e)} />
                                 <span className="input-group-addon">N</span>
                             </div>
                         </div>

@@ -42,6 +42,61 @@ class Product {
             }
         });
     }
+
+    // Form validation
+    checkProduct(product)
+    {
+        let result = {
+            status: true,
+            msg: "Validation passed."
+        };
+        
+        if (typeof product.name !== 'string' || product.name.length === 0) {
+            return {
+                status: false,
+                msg: "Product name can not be empty."
+            }
+        }
+
+        if (typeof product.subtitle !== 'string' || product.subtitle.length === 0) {
+            return {
+                status: false,
+                msg: "Subtitle name can not be empty."
+            }
+        }
+
+        if (typeof product.price !== 'number' || product.price < 0) {
+            return {
+                status: false,
+                msg: "Price is not correct."
+            }
+        }
+        if (typeof product.stock !== 'number' || product.stock < 0) {
+            return {
+                status: false,
+                msg: "Stock is not correct."
+            }
+        }
+
+        if (typeof product.categoryId !== 'number' || product.categoryId < 0) {
+            return {
+                status: false,
+                msg: "Product Id is not correct."
+            }
+        }
+
+        return result;
+    }
+
+    //
+    saveProduct(product)
+    {
+        return _mm.request({
+            url: '/manage/product/save.do',
+            type: 'POST',
+            data: product
+        });
+    }
 }
 
 export default Product;
