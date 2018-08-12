@@ -7,17 +7,17 @@ class FileUploader extends React.Component {
         const options = {
             baseUrl: '/manage/product/upload.do',
             fileFieldName: 'upload_file',   // read the document
-            dataType : 'json',
+            dataType: 'json',
             chooseAndUpload: true,
-            uploadSuccess: () =>{},
-            uploadSuccess: () =>{},
+            uploadSuccess: (res) => this.props.onSuccess(res.data),
+            uploadError: (err) => this.props.onError(err.message),
         }
 
         return (
             <FileUpload options={options}>
                 <button ref="chooseAndUpload">choose</button>
                 {/* <button ref="uploadBtn">upload</button> */}
-            </FileUpload>  
+            </FileUpload>
         );
 
     }

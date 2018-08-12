@@ -24,6 +24,7 @@ class ProductSave extends React.Component {
         this.state = {
             categoryId: 0,
             parentCategoryId: 0,
+            subImages: []
         }
     }
 
@@ -33,6 +34,18 @@ class ProductSave extends React.Component {
             categoryId,
             parentCategoryId
         });
+    }
+
+    onUploadSuccess(res) {
+        let sumImages = this.state.subImages;
+        sumImages.push(res);// uri and url
+        this.setState({
+            subImages: sumImages
+        });
+    }
+
+    onUploadError(err) {
+        _mm.errorTips(error.message || "upload file failed.");
     }
 
     render() {
@@ -79,8 +92,15 @@ class ProductSave extends React.Component {
                     <div className="form-group">
                         <label className="col-sm-2 control-label">Product Image</label>
                         <div className="col-md-10">
-                            <FileUploader>
-
+                            {
+                                this.state.subImages.length > 0
+                                    ? this.state.subImages.map((image, index) => (<img src={image.url} key={index} />))
+                                    : <div>Please update image</div>
+                            }
+                        </div>
+                        <div className="col-md-10">
+                            <FileUploader onSuccess={(data) => this.onUploadSuccess(data)}
+                                onError={(errMsg) => onUploadError(errMsg)}>
                             </FileUploader>
                         </div>
                     </div>
