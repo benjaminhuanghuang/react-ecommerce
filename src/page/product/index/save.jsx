@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 import PageTitle from 'component/page-title/index.jsx';
 import CategorySelector from './category-selector.jsx';
 import FileUploader from 'util/file-uploader/index.jsx';
-
+//
+import './save.scss';
 //
 import Product from 'service/product-service.jsx'
 import MUtil from 'util/mm.jsx';
@@ -44,8 +45,8 @@ class ProductSave extends React.Component {
         });
     }
 
-    onUploadError(err) {
-        _mm.errorTips(error.message || "upload file failed.");
+    onUploadError(errMsg) {
+        _mm.errorTips(errMsg || "upload file failed.");
     }
 
     render() {
@@ -94,7 +95,11 @@ class ProductSave extends React.Component {
                         <div className="col-md-10">
                             {
                                 this.state.subImages.length > 0
-                                    ? this.state.subImages.map((image, index) => (<img src={image.url} key={index} />))
+                                    ? this.state.subImages.map((image, index) => (
+                                        <div className="img-container" key={index}>
+                                            <img src={image.url} className="sub-img"/>
+                                        </div>
+                                    ))
                                     : <div>Please update image</div>
                             }
                         </div>
