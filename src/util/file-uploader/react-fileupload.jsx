@@ -10,7 +10,7 @@
 
 /*eslint indent: 0 */
 import React from 'react';
-import RT from 'prop-types';
+import PT from 'prop-types';
 
 const emptyFunction = function () { }
 /*当前IE上传组的id*/
@@ -21,7 +21,7 @@ const IEFormGroup = [true]
 let xhrList = []
 let currentXHRID = 0
 
-class FileUpload extends React.cloneElement {
+class FileUpload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -712,8 +712,7 @@ class FileUpload extends React.cloneElement {
     }
 
 }
-FileUpdate.propTypes = {
-
+FileUpload.propTypes = {
     options: PT.shape({
         /*basics*/
         baseUrl: PT.string.isRequired,
