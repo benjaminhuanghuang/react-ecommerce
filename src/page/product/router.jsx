@@ -5,7 +5,6 @@ import ProductList from 'page/product/index/index.jsx';
 import ProductSave from 'page/product/index/save.jsx';
 import ProductDetail from 'page/product/index/detail.jsx';
 
-
 class ProductRouter extends React.Component {
     render() {
         return (        
