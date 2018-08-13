@@ -127,9 +127,9 @@ class ProductSave extends React.Component {
         if (productCheckResult.status) {
             if(this.state.id)  // edit
                 product.id = this.state.id;
-            _product.saveProduct(produt).then(res => {
+            _product.saveProduct(product).then(res => {
                 _mm.successTips(res);
-                this.props.history.push('/product/index');
+                this.props.history.push('/product/list');
             }, errMsg => {
                 _mm.errorTips(errMsg);
             });
@@ -228,7 +228,5 @@ class ProductSave extends React.Component {
         );
     }
 }
-
-
 
 export default ProductSave;

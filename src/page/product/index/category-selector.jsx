@@ -37,11 +37,11 @@ class CategorySelector extends React.Component {
                 secondCategoryId: 0
             });
         }
-        else{
+        else {
             this.setState({
                 firstCategoryId: nextProps.parentCategoryId,
                 secondCategoryId: nextProps.categoryId
-            }, ()=>{
+            }, () => {
                 parentCategoryIdChange && this.loadSecondCategory();
             });
         }
@@ -65,6 +65,8 @@ class CategorySelector extends React.Component {
     }
 
     onFirstCategoryChange(e) {
+        if (this.props.readOnly)
+            return;
         let newValue = e.target.value || 0;
 
         this.setState({
@@ -78,6 +80,8 @@ class CategorySelector extends React.Component {
     }
 
     onSecondCategoryChange(e) {
+        if (this.props.readOnly)
+            return;
         let newValue = e.target.value || 0;
 
         this.setState({
@@ -89,6 +93,7 @@ class CategorySelector extends React.Component {
 
     // Pass to parent component
     onPropsCategoryChange() {
+
         // this.props.onPropsCategoryChange();
         let categoryChangele = typeof this.props.onCategoryChange === 'function';
         if (categoryChangele) {
@@ -106,6 +111,7 @@ class CategorySelector extends React.Component {
             <div className="col-sm-10">
                 <select className="form-control cate-select"
                     value={this.state.firstCategoryId}
+                    readOnly={this.props.readOnly}
                     onChange={(e) => this.onFirstCategoryChange(e)}>
                     <option value="">Please select catgory 1</option>
                     {
@@ -119,6 +125,7 @@ class CategorySelector extends React.Component {
                         (
                             <select name="" className="form-control cate-select"
                                 value={this.state.secondCategoryId}
+                                readOnly={this.props.readOnly}
                                 onChange={(e) => this.onSecondCategoryChange(e)}>
                                 <option value="">Please select catgory 2</option>
                                 {
