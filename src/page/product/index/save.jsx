@@ -53,7 +53,7 @@ class ProductSave extends React.Component {
                         url: res.imageHost + imgUri
                      }
                 });
-
+                res.defaultDetial = res.detail;
                 this.setState(res);
             }, (errMsg)=>{
                 _mm.error.Tips(errMsg);
@@ -125,6 +125,8 @@ class ProductSave extends React.Component {
         let productCheckResult = _product.checkProduct(product);
         // form validation
         if (productCheckResult.status) {
+            if(this.state.id)  // edit
+                product.id = this.state.id;
             _product.saveProduct(produt).then(res => {
                 _mm.successTips(res);
                 this.props.history.push('/product/index');
@@ -212,6 +214,7 @@ class ProductSave extends React.Component {
                         <label className="col-md-2 control-label">Product detail</label>
                         <div className="col-md-10">
                             <RichEditor detail = {this.state.detail}
+                                defaultDetial = {this.state.defaultDetial}
                                 onValueChange={(value) => this.onRichEditorChange(value)}/>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import Simditor from 'simditor';
 import 'simditor/styles/simditor.scss';
-
+import './index.scss';
 
 class RichEditor extends React.Component {
     constructor(props) {
@@ -10,19 +10,23 @@ class RichEditor extends React.Component {
 
         }
     }
-    
-    componentDidMount()
-    {
+
+    componentDidMount() {
         this.loadEditor();
     }
 
-    loadEditor(){
+    componentWillReceiveProps(nextProps) {
+        if (this.props.defaultDetail !== nextProps.defaultDetail)
+            this.simditor.setValue(nextProps.defaultDetail)
+    }
+
+    loadEditor() {
         let element = this.refs['textarea'];
 
         this.simditor = new Simditor({
             textarea: $(element),
             defaultValue: this.props.placeholder || 'Please input',
-            upload:{
+            upload: {
                 url: '/manage/product/richtext_img_upload.do',
                 defaultImage: '',
                 fileKey: 'upload_file'
@@ -33,8 +37,8 @@ class RichEditor extends React.Component {
     }
 
     // expose jquery event
-    bindEditorEvent(){
-        this.simditor.on('valuechanged', e =>{
+    bindEditorEvent() {
+        this.simditor.on('valuechanged', e => {
             this.props.onValueChange(this.simditor.getValue());
         });
     }
