@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 //
 import PageTitle from 'component/page-title/index.jsx';
 import TableList from 'util/table-list/index.jsx';
 //
-import Category from 'service/category-service.jsx'
+
 import MUtil from 'util/mm.jsx';
+import Product from 'service/product-service.jsx'
 
 const _mm = new MUtil();
-const _category = new Category();
+const _product = new Product();
 
 class CategoryList extends React.Component {
     constructor(props) {
@@ -25,14 +25,32 @@ class CategoryList extends React.Component {
     }
 
     loadCategoryList() {
-        _user.getUserList(this.state.parentCategoryId).then(res => {
-            this.setState(res)
+        _product.getCategoryList(this.state.parentCategoryId).then(res => {
+            // console.log('Category List', res);
+            this.setState({
+                list: res
+            })
         }, errMsg => {
             this.setState({
                 list: []
             });
             _mm.errorTips(errMsg);
         });
+    }
+
+    onUpdateName(id, name) {
+        let newName = window.prompt('Please input new name', name);
+        if (newName) {
+            _product.updateCategoryName({
+                categoryId: id,
+                categoryName: newName
+            }).then(res => {
+                _mm.successTips(res);
+                this.loadCategoryList();
+            }, errMsg => {
+                _mm.errorTips(errMsg);
+            });
+        }
     }
 
     render() {
@@ -48,7 +66,8 @@ class CategoryList extends React.Component {
                     <td>{category.id}</td>
                     <td>{category.name}</td>
                     <td>
-                        <a href="" className="opear"></a>
+                        <a href="" className="opear"
+                            onClick={(e) => this.onUpdateName(category.id, category.name)}>Change name</a>
                     </td>
                 </tr>
             )
