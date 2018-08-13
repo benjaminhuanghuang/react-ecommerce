@@ -117,6 +117,15 @@ class Product {
             data: category
         });
     }
+
+    updateCategoryName(category)
+    {
+        return _mm.request({
+            url: '/manage/category/set_category_name.do',
+            type: 'POST',
+            data: category
+        });
+    }
 }
 
 export default Product;

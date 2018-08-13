@@ -98,7 +98,7 @@ class CategoryList extends React.Component {
             <div id="page-wrapper">
                 <PageTitle title="Category List">
                     <div className="page-header-right">
-                        <Link className="btn btn-primary" to="/product/save">
+                        <Link className="btn btn-primary" to="/product-category/add">
                             <i className="fa fa-plus"></i>
                             <span>Add Category</span>
                         </Link>
