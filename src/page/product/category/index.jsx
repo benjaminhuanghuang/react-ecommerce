@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 //
 import PageTitle from 'component/page-title/index.jsx';
 import TableList from 'util/table-list/index.jsx';
@@ -19,9 +20,25 @@ class CategoryList extends React.Component {
             parentCategoryId: this.props.match.params.categoryId || 0
         }
     }
-
+    // loaded at first time
     componentDidMount() {
         this.loadCategoryList();
+    }
+
+    // when check sub category
+    componentDidUpdate(prevProps, presState){
+        let oldPath = prevProps.location.pathname;
+        let newPath = this.props.location.pathname;
+        let newId = this.props.match.params.categoryId || 0;
+
+        if(oldPath !== newPath)
+        {
+            this.setState({
+                parentCategoryId: newId
+            }, ()=>{
+                this.loadCategoryList();
+            })
+        }      
     }
 
     loadCategoryList() {
@@ -68,6 +85,11 @@ class CategoryList extends React.Component {
                     <td>
                         <a href="" className="opear"
                             onClick={(e) => this.onUpdateName(category.id, category.name)}>Change name</a>
+                        {
+                            category.parentId === 0
+                            ? <Link to= {`/product-category/index/${category.id}`}>Sub category</Link>
+                            : null
+                        }
                     </td>
                 </tr>
             )
@@ -76,7 +98,11 @@ class CategoryList extends React.Component {
         return (
             <div id="page-wrapper">
                 <PageTitle title="Category List" />
-
+                <div className="row">
+                    <div className="col-md-12">
+                        <p>Parent Category ID: {this.state.parentCategoryId} </p>
+                    </div>
+                </div>
                 <TableList tableHeads={tableHeads}>
                     {listBody}
                 </TableList>
