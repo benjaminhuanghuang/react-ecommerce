@@ -34,6 +34,33 @@ class CategoryAdd extends React.Component {
         });
     }
 
+    onValueChange(e) {
+        let name = e.target.name;
+        let value = e.target.value.trim();
+
+        this.setState({
+            [name]: value
+        });
+    }
+    
+    onSubmit(e) {
+        let categoryName = this.state.categoryName.trim();
+        if (categoryName) {
+            _product.saveCategory({
+                parentId: this.state.parentId,
+                categoryName
+            }).then(res => {
+                _mm.succesTips(res);
+                this.props.history.push('/product-category/index');
+            }, errMsg => {
+                _mm.errorTips(errMsg);
+            });
+        }
+        else {
+            _mm.errorTips("Please input category name");
+        }
+    }
+
     render() {
         return (
             <div id="page-wrapper">
@@ -44,7 +71,8 @@ class CategoryAdd extends React.Component {
                             <div className="form-group">
                                 <label className="col-sm-2 control-label">Parent Category</label>
                                 <div className="col-sm-5">
-                                    <select name="parentId">
+                                    <select name="parentId" className="form-control"
+                                        onChange={(e) => this.onValueChange(e)}>
                                         <option value="0"> Root Category</option>
                                         {
                                             this.state.categoryList.map((category, index) => {
@@ -57,8 +85,8 @@ class CategoryAdd extends React.Component {
                             <div className="form-group">
                                 <label className="col-sm-2 control-label">Product Name</label>
                                 <div className="col-sm-5">
-                                    <input type="text" className="form-control" placeholder="Product name"
-                                        name='name' value={this.state.name}
+                                    <input type="text" className="form-control" placeholder="Category name"
+                                        name='categoryName'
                                         onChange={(e) => this.onValueChange(e)} />
                                 </div>
                             </div>

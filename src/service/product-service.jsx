@@ -108,6 +108,15 @@ class Product {
             data: product
         });
     }
+
+    saveCategory(category)
+    {
+        return _mm.request({
+            url: '/manage/category/add_category.do',
+            type: 'POST',
+            data: category
+        });
+    }
 }
 
 export default Product;
