@@ -33,6 +33,16 @@ class Order {
             }
         });
     }
+
+    sendGoods(orderNumber){
+        return _mm.request({
+            url: '/manage/order/send_goods.do',
+            type: 'POST',
+            data:{
+                orderNo: orderNumber
+            }
+        });
+    }
 }
 
 export default Order;

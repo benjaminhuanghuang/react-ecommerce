@@ -9,6 +9,8 @@ import Order from 'service/order-service.jsx'
 
 const _mm = new MUtil();
 const _order = new Order();
+//
+import './detail.scss';
 
 class OrderDetail extends React.Component {
     constructor(props) {
@@ -37,6 +39,19 @@ class OrderDetail extends React.Component {
 
     }
 
+    onSendGoods(e)
+    {
+        if(window.confirm('Send order?'))
+        {
+            _order.sendGoods(this.state.orderNumber).then(res => {
+                _mm.successTips(errMsg);
+                this.loaderOrderDetial();
+            }, (errMsg) => {
+                _mm.errorTips(errMsg);
+            });
+        }
+    }
+
     render() {
         let receiverInfo = this.state.orderInfo.shippingVo || {};
 
@@ -52,7 +67,7 @@ class OrderDetail extends React.Component {
             return (
                 <tr key={index}>
                     <td>
-                        <img className="p-img" src={`${product.productImage}`} 
+                        <img className="p-img" src={`${product.productImage}`}
                             alt={product.productName}></img>
                     </td>
                     <td>{product.productName}</td>
@@ -93,7 +108,15 @@ class OrderDetail extends React.Component {
                     <div className="form-group">
                         <label className="col-sm-2 control-label">Order Status</label>
                         <div className="col-sm-5">
-                            <p className="form-control-static">{this.state.orderInfo.statusDesc}</p>
+                            <p className="form-control-static">
+                                {this.state.orderInfo.statusDesc}
+                                {
+                                    this.state.orderInfo.status === 20
+                                        ? <button className="btn btn-default btn-sm"
+                                            onClick={e => this.onSendGoods(e)}>Deliver</button>
+                                        : null
+                                }
+                            </p>
                         </div>
                     </div>
                     <div className="form-group">
