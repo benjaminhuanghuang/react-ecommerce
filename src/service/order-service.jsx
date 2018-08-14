@@ -8,13 +8,13 @@ class Order {
         let url = '';
         let data = {};
         if (listParam.listType === 'list') {
-            url = '/manage/product/list.do';
+            url = '/manage/order/list.do';
             data.pageNum = listParam.pageNum;
         }
         else if (listParam.listType === 'search') {
-            url = '/manage/product/search.do';
+            url = '/manage/order/search.do';
             data.pageNum = listParam.pageNum;
-            data[listParam.searchType] = listParam.keyword;
+            data.orderNo = listParam.orderNumber;
         }
 
         return _mm.request({
