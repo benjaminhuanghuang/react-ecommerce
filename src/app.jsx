@@ -11,6 +11,7 @@ import UserList from 'page/user/index.jsx';
 //
 import ProductRouter from 'page/product/router.jsx';
 import OrderList from 'page/order/index.jsx';
+import OrderDetail from 'page/order/detail.jsx';
 
 class App extends React.Component {
     render() {
@@ -22,6 +23,7 @@ class App extends React.Component {
                     <Route path="/product-category" component={ProductRouter} />
                     <Route path="/order/index" component={OrderList} />
                     <Route path="/user/index" component={UserList} />
+                    <Route path="/order/detail/:orderNumber?" component={OrderDetail} />
                     <Redirect exact from="/user" to="/user/index" />
                     <Redirect exact from="/order" to="/order/index" />
                     <Route component={Error} />

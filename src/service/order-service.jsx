@@ -23,8 +23,16 @@ class Order {
             data
         });
     }
-    
-    
+
+    getOrderDetail(orderNumber) {
+        return _mm.request({
+            url: '/manage/order/detail.do',
+            type: 'POST',
+            data:{
+                orderNo: orderNumber
+            }
+        });
+    }
 }
 
 export default Order;

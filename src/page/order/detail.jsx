@@ -2,86 +2,115 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 //
 import PageTitle from 'component/page-title/index.jsx';
-import Pagination from 'util/pagination/index.jsx';
 import TableList from 'util/table-list/index.jsx';
-//
 
 import MUtil from 'util/mm.jsx';
-import Product from 'service/product-service.jsx'
+import Order from 'service/order-service.jsx'
 
 const _mm = new MUtil();
-const _product = new Product();
+const _order = new Order();
 
 class OrderDetail extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            list: [],
+            orderNumber: this.props.match.params.orderNumber,
+            orderInfo: {}
         }
     }
     // loaded at first time
     componentDidMount() {
-        
+        this.loaderOrderDetial()
     }
 
-    loadCategoryList() {
-        _product.getCategoryList(this.state.parentCategoryId).then(res => {
-            // console.log('Category List', res);
-            this.setState({
-                list: res
-            })
-        }, errMsg => {
-            this.setState({
-                list: []
+    loaderOrderDetial() {
+        if (this.state.orderNumber) {
+            _order.getOrderDetail(this.state.orderNumber).then(res => {
+                this.setState({
+                    orderInfo: res
+                });
+            }, (errMsg) => {
+                _mm.errorTips(errMsg);
             });
-            _mm.errorTips(errMsg);
-        });
+        }
+
     }
 
     render() {
-        let tableHeads = [
-            { name: 'Category ID', width: '10%' },
-            { name: 'Name', width: '15%' },
-            { name: 'Operation', width: '10%' },
-        ];
+        let receiverInfo = this.state.orderInfo.shippingVo || {};
 
-        let listBody = this.state.list.map((category, index) => {
+        let tableHeads = [
+            'Product Image',
+            'Product Info',
+            'Price',
+            'Count',
+            'Summary'
+        ];
+        let productList = this.state.orderInfo.orderItemVoList || [];
+        let listBody = productList.map((product, index) => {
             return (
                 <tr key={index}>
-                    <td>{category.id}</td>
-                    <td>{category.name}</td>
                     <td>
-                        <a href="" className="opear"
-                            onClick={(e) => this.onUpdateName(category.id, category.name)}>Change name</a>
-                        {
-                            category.parentId === 0
-                                ? <Link to={`/product-category/index/${category.id}`}>Sub category</Link>
-                                : null
-                        }
+                        <img className="p-img" src={`${product.productImage}`} 
+                            alt={product.productName}></img>
                     </td>
+                    <td>{product.productName}</td>
+                    <td>{product.currentUnitPrice}</td>
+                    <td>{product.quantity}</td>
+                    <td>{product.totalPrice}</td>
                 </tr>
             )
         });
-
         return (
             <div id="page-wrapper">
-                <PageTitle title="Category List">
-                    <div className="page-header-right">
-                        <Link className="btn btn-primary" to="/product-category/add">
-                            <i className="fa fa-plus"></i>
-                            <span>Add Category</span>
-                        </Link>
+                <PageTitle title="Order Detail" />
+                <div className="form-horizontal">
+                    <div className="form-group">
+                        <label className="col-sm-2 control-label">Order Number</label>
+                        <div className="col-sm-5">
+                            <p className="form-control-static">{this.state.orderInfo.orderNo}</p>
+                        </div>
                     </div>
-                </PageTitle>
-                <div className="row">
-                    <div className="col-md-12">
-                        <p>Parent Category ID: {this.state.parentCategoryId} </p>
+                    <div className="form-group">
+                        <label className="col-sm-2 control-label">Create time</label>
+                        <div className="col-sm-5">
+                            <p className="form-control-static">{this.state.orderInfo.createTime}</p>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-sm-2 control-label">Receiver</label>
+                        <div className="col-sm-5">
+                            <p className="form-control-static">
+                                {receiverInfo.receiverName}
+                                {receiverInfo.receiverProvince}
+                                {receiverInfo.receiverCity}
+                                {receiverInfo.receiverAddress}
+                                {receiverInfo.receiverMobile || receiverInfo.phone}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-sm-2 control-label">Order Status</label>
+                        <div className="col-sm-5">
+                            <p className="form-control-static">{this.state.orderInfo.statusDesc}</p>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-sm-2 control-label">Order Payment</label>
+                        <div className="col-sm-5">
+                            <p className="form-control-static">{this.state.orderInfo.payment}</p>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-sm-2 control-label">Products List</label>
+                        <div className="col-sm-10">
+                            <TableList tableHeads={tableHeads}>
+                                {listBody}
+                            </TableList>
+                        </div>
                     </div>
                 </div>
-                <TableList tableHeads={tableHeads}>
-                    {listBody}
-                </TableList>
             </div>
         );
     }
