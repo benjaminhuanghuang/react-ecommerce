@@ -9,7 +9,7 @@ class Order {
         let data = {};
         if (listParam.listType === 'list') {
             url = '/manage/order/list.do';
-            data.pageNum = listParam.pageNum;
+            data.pageNum = listParam.orderNumber;
         }
         else if (listParam.listType === 'search') {
             url = '/manage/order/search.do';

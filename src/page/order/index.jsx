@@ -35,7 +35,7 @@ class OrderList extends React.Component {
         listParam.pageNum = this.state.pageNum;
 
         if (this.state.listType === 'search') {
-            listParam.orderNo = this.state.orderNumber;
+            listParam.orderNumber= this.state.orderNumber;
         }
 
         _order.getOrderList(listParam).then(res => {
@@ -56,13 +56,12 @@ class OrderList extends React.Component {
         });
     }
 
-    onSearch(orderNum) {
-        // console.log(searchType, searchKeyword);
-        let listType = orderNum === "" ? 'list' : 'search'
+    onSearch(orderNumber) {
+        let listType = orderNumber === "" ? 'list' : 'search'
         this.setState({
             listType,
             pageNum: 1,
-            orderNo: orderNum,
+            orderNumber,
         }, () => {
             this.loadOrderList();
         });
